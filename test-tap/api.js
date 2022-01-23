@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import ciInfo from 'ci-info';
-import del from 'del';
+import rimraf from 'rimraf';
 import {test} from 'tap';
 
 import Api from '../lib/api.js';
@@ -400,7 +400,7 @@ for (const opt of options) {
 	});
 
 	test(`caching can be disabled - workerThreads: ${opt.workerThreads}`, async t => {
-		del.sync(path.join(__dirname, 'fixture/caching/node_modules'));
+		rimraf.sync(path.join(__dirname, 'fixture/caching/node_modules'));
 
 		const api = await apiCreator({
 			...opt,
